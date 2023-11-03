@@ -1,10 +1,13 @@
 ﻿using System;
+using chessboard;
 
-namespace Xadrez {
+namespace xadrez_console {
     class Program {
         static void Main(string[] args) {
 
-            Console.WriteLine("Hello world!");
+            Position p = new Position(3, 4);
+
+            Console.WriteLine(p);
 
         }
     }
