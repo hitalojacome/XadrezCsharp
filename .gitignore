@@ -1,0 +1,11 @@
+# Ignorar a pasta bin/
+bin/
+
+# Ignorar a pasta obj/
+obj/
+
+# Ignorar arquivos .sln
+*.sln
+
+# Ignorar arquivos .csproj
+*.csproj
