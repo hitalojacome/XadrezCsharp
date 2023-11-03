@@ -10,10 +10,10 @@ namespace xadrez_console
 
             for(int i=0; i<board.lines; i++) {
                 for(int j=0; j<board.columns; j++) {
-                    if(board.piece(i,j) == null) {
+                    if(board.Piece(i,j) == null) {
                         Console.Write("- "); // Imprime um hífen para espaços vaziox
                     } else { 
-                        Console.Write($"{board.piece(i,j)} "); // Imprime a representação da peça 
+                        Console.Write($"{board.Piece(i,j)} "); // Imprime a representação da peça 
                     }
                 }
                 Console.WriteLine();
