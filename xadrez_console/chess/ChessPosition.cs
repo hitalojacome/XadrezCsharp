@@ -16,7 +16,7 @@ namespace chess
         
         public Position toPosition() // Responsável por converter uma posição em notação de xadrez para uma instância da classe Position
         {
-            return new Position(8 - line, column - 'A'); // Esta linha realiza a conversão da posição em notação de xadrez para uma representação interna.
+            return new Position(8 - line, column - 'a'); // Esta linha realiza a conversão da posição em notação de xadrez para uma representação interna.
 
             /* 
                 8 - line: A variável line contém um valor numérico que representa a linha em notação de xadrez (por exemplo, 1 a 8). A subtração de 8 - line é usada para converter a notação de xadrez para um índice de matriz, onde a linha 1 em notação de xadrez se torna 7 (índice de matriz 0) e a linha 8 em notação de xadrez se torna 0 (índice de matriz 7).

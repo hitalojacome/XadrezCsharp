@@ -18,7 +18,7 @@ namespace chessboard
             return pieces[line, column];
         }
 
-        public Piece Piece(Position pos) 
+        public Piece Piece(Position pos) // Como a matriz é privativa, criamos este método para ter acesso a peça em sua linha e coluna
         {
             return pieces[pos.line, pos.column];
         }
@@ -37,6 +37,18 @@ namespace chessboard
             }
             pieces[pos.line, pos.column] = p; // determina que uma Piece 'p' é a instanciação de linha e coluna da matriz
             p.position = pos; // Determina que o atributo position será instanciado como a posição do nosso objeto p
+        }
+
+        public Piece RemovePiece(Position pos) 
+        {
+            if (Piece(pos) == null)
+            {
+                return null;
+            }
+            Piece aux = Piece(pos);
+            aux.position = null;
+            pieces[pos.line, pos.column] = null;
+            return aux;
         }
 
         public bool ValidPosition(Position pos) // Método verifica se a posição é valida

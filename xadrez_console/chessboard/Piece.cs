@@ -14,5 +14,9 @@ namespace chessboard
             this.color = color; // Recebe a cor passada conforme o enum
             this.moveCount = 0; // Contador se incia com 0
         }
+
+        public void SetMoveCount() {
+            moveCount++;
+        }
     }
 }
