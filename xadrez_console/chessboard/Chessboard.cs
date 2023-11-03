@@ -15,5 +15,10 @@ namespace chessboard
         public Piece piece(int line, int column) {
             return pieces[line, column];
         }
+
+        public void PlacePiece(Piece p, Position pos) {
+            pieces[pos.line, pos.column] = p;
+            p.position = pos;
+        }
     }
 }

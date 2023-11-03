@@ -7,9 +7,10 @@ namespace chessboard
         public int moveCount { get; protected set; }
         public Chessboard board { get; protected set; }
 
-        public Piece(Position position, Chessboard board, Color color) {
-            this.position = position;
+        public Piece(Chessboard board, Color color) {
+            this.position = null;
             this.board = board;
+            this.color = color;
             this.moveCount = 0;
         }
     }
