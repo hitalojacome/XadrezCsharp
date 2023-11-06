@@ -2,12 +2,14 @@ using chessboard;
 
 namespace chess
 {
-    public class Rook : Piece // A peça torre herda da classe peça
+    /* A Rook herda da classe peça
+    Representação da torre no xadrez*/
+    public class Rook : Piece 
     {
-        public Rook(Chessboard board, Color color) : base(board, color) {} // Construtor herdando o já criado na classe Piece
+        public Rook(Chessboard board, Color color) : base(board, color) {} 
 
-
-        public override string ToString() // Método para imprimir sua representação como 'T'
+        // Torre é exibido como 'T'
+        public override string ToString() 
         {
             return "T";
         }
