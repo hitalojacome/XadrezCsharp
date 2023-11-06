@@ -1,22 +1,27 @@
 namespace chessboard
 {
+    // Responsável pela peça em si
     public class Piece
     {
-        public Position position { get; set; } // Atributo do tipo da classe Position
-        public Color color { get; protected set; } // Atributo do tipo enum de Color
-        public int moveCount { get; protected set; } // Armazena q quantidade de movimentos
-        public Chessboard board { get; protected set; } // Atributo do tipo da classe Chessboard
+        // Peça tem uma posição | composição
+        public Position Position { get; set; } 
+        // Tipo enum de Color
+        public Color Color { get; protected set; } 
+        // Quantidade de movimentos
+        public int MoveCount { get; protected set; }
+        // Peça está em um tabuleiro | composição
+        public Chessboard Board { get; protected set; }
 
-        public Piece(Chessboard board, Color color) // Construtor para instanciação
+        public Piece(Position position, Chessboard board, Color color)
         {
-            this.position = null; // Posição inicia sem valor
-            this.board = board; // Recebe o tabuleiro passado no argumento
-            this.color = color; // Recebe a cor passada conforme o enum
-            this.moveCount = 0; // Contador se incia com 0
+            Position = position; // Posição inicia sem valor
+            Board = board; // Recebe o tabuleiro passado no argumento
+            Color = color; // Recebe a cor passada conforme o enum
+            MoveCount = 0; // Por se iniciar com 0 não passa como parametro
         }
 
         public void SetMoveCount() {
-            moveCount++;
+            MoveCount++;
         }
     }
 }

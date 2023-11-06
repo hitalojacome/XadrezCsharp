@@ -1,26 +1,29 @@
 namespace chessboard
 {
+    // Classe do tabuleiro
     public class Chessboard
     {
-        public int lines { get; set; } // Atributo para armazenar as linhas
-        public int columns { get; set; } // Atributo para armazenar as colunas
-        private Piece[,] pieces; // Atributo privativo que cria uma matriz conforme as peças da classe Piece
+        public int Lines { get; set; }
+        public int Columns { get; set; }
+        // Um tabuleiro tem uma matriz de peças, somente o tabuleiro pode acessar essas peças
+        private Piece[,] _pieces; 
 
-        public Chessboard(int lines, int columns) // Construtor do tabuleiro
+        public Chessboard(int lines, int columns)
         {
-            this.lines = lines; // Recebe o número de linhas passada no argumento
-            this.columns = columns; // Recebe o número de colunas passada no argumento
-            pieces = new Piece[lines, columns]; // Instancia o atributo pieces (que é uma matriz) com base nas linhas e colunas passadas
+            Lines = lines;
+            Columns = columns;
+            // Instancia a matriz de peças com base nas linhas e colunas passadas como argumentos
+            _pieces = new Piece[lines, columns];
         }
 
         public Piece Piece(int line, int column) // Como a matriz é privativa, criamos este método para ter acesso a peça em sua linha e coluna
         {
-            return pieces[line, column];
+            return _pieces[line, column];
         }
 
         public Piece Piece(Position pos) // Como a matriz é privativa, criamos este método para ter acesso a peça em sua linha e coluna
         {
-            return pieces[pos.line, pos.column];
+            return _pieces[pos.line, pos.column];
         }
 
         public bool HasPiece(Position pos) // Método verifica se a peça existe no tabuleiro
@@ -35,7 +38,7 @@ namespace chessboard
             {
                 throw new ChessException("A piece already exists in this position!");
             }
-            pieces[pos.line, pos.column] = p; // determina que uma Piece 'p' é a instanciação de linha e coluna da matriz
+            _pieces[pos.line, pos.column] = p; // determina que uma Piece 'p' é a instanciação de linha e coluna da matriz
             p.position = pos; // Determina que o atributo position será instanciado como a posição do nosso objeto p
         }
 
@@ -47,7 +50,7 @@ namespace chessboard
             }
             Piece aux = Piece(pos);
             aux.position = null;
-            pieces[pos.line, pos.column] = null;
+            _pieces[pos.line, pos.column] = null;
             return aux;
         }
 

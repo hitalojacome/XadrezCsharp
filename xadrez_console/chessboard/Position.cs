@@ -1,6 +1,6 @@
 namespace chessboard
 {
-    // Responsávl pela posição no tabuleiro
+    // Responsável pela posição no tabuleiro
     public class Position
     {
         // A posição é composta por linha e coluna
