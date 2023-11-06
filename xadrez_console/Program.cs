@@ -6,16 +6,8 @@ namespace xadrez_console {
     class Program {
         static void Main(string[] args) {
 
-            try 
-            {
-                ChessGame game = new ChessGame();
-
-                Screen.printChessboard(game.board);
-            }
-            catch (ChessException e)
-            {
-                Console.WriteLine(e.Message);
-            }            
+            Position p = new Position(3, 4);        
+            Console.WriteLine(p); 
         }
     }
 }

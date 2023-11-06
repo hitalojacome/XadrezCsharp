@@ -1,19 +1,22 @@
 namespace chessboard
 {
+    // Responsávl pela posição no tabuleiro
     public class Position
     {
-        public int line { get; set; } // atributo linha
-        public int column { get; set; } // atributo coluna
+        // A posição é composta por linha e coluna
+        public int Line { get; set; }
+        public int Column { get; set; }
 
-        public Position(int line, int column) // Construtor recebendo linha e coluna
+        public Position(int line, int column)
         {
-            this.line = line;
-            this.column = column;
+            Line = line;
+            Column = column;
         }
 
-        public override string ToString() // Método para impressão da posição
+        // Método para impressão da posição
+        public override string ToString() 
         {
-            return $"{line}, {column}";
+            return $"{Line}, {Column}";
         }
     }
 }
