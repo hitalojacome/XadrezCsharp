@@ -23,5 +23,14 @@ namespace chessboard
             // Retorna a peça na posição indicada
             return _pieces[line, column];
         }
+
+        // Método para inserção de peça no tabuleiro
+        public void InsertPiece(Piece piece, Position position)
+        {
+            // A matriz é uma peça
+            _pieces[position.Line, position.Column] = piece;
+            // A posição da peça é a posição passada
+            piece.Position = position;
+        }
     }
 }
