@@ -10,7 +10,7 @@ namespace xadrez_console {
 
                 board.InsertPiece(new Rook(board, Color.Black), new Position(0,0));
                 board.InsertPiece(new Rook(board, Color.Black), new Position(1,3));
-                board.InsertPiece(new King(board, Color.Black), new Position(0,9));
+                board.InsertPiece(new King(board, Color.Black), new Position(0,1));
 
                 Screen.PrintChessboard(board);
             }

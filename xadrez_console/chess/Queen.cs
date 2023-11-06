@@ -2,12 +2,14 @@ using chessboard;
 
 namespace chess
 {
-    public class Queen : Piece // A peça rainha herda da classe peça
+    /* A Queen herda da classe peça
+    Representação da rainha no xadrez*/
+    public class Queen : Piece
     {
-        public Queen(Chessboard board, Color color) : base(board, color) {} // Construtor herdando o já criado na classe Piece
+        public Queen(Chessboard board, Color color) : base(board, color) {}
 
- 
-        public override string ToString() // Método para imprimir sua representação como 'Q'
+        // Queen é exibido como 'Q'
+        public override string ToString()
         {
             return "Q";
         }
