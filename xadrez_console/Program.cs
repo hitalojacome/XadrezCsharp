@@ -5,6 +5,7 @@ using chessboard;
 namespace xadrez_console {
     class Program {
         static void Main(string[] args) {
+            
             try {
                 Chessboard board = new(8,8);
 
