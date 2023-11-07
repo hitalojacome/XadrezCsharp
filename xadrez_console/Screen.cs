@@ -35,13 +35,18 @@ namespace xadrez_console
 
         }
 
+        // Método estático para impressão personalizada das peças
         public static void PrintPiece(Piece piece)
         {
+            // SE a cor da peça for branca
             if (piece.Color == Color.White)
-            {
+            {   
+                // Mostre-a
                 Console.Write(piece);
             }
-            else {
+            else  // SE NÃO
+            {
+                
                 ConsoleColor aux = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(piece);
