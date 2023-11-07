@@ -6,9 +6,9 @@ namespace xadrez_console {
     class Program {
         static void Main(string[] args) {
             
-            ChessPosition position = new ChessPosition('A', 1);
+            ChessPosition position = new ChessPosition('C', 7);
 
-            Console.WriteLine(position);
+            Console.WriteLine(position.ToPosition());
         }
     }
 }
