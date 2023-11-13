@@ -20,7 +20,8 @@ namespace chessboard
             Color = color;
             MoveCount = 0; // Por se iniciar com 0 não passa como parametro
         }
-
+        
+        // Método para incrementação em cada movimento
         public void SetMoveCount() {
             MoveCount++;
         }
