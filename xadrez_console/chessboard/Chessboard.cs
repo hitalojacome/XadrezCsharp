@@ -53,6 +53,25 @@ namespace chessboard
             piece.Position = position;
         }
 
+        // Método para remover a peça do tabuleiro
+        public Piece RemovePiece(Position position)
+        {
+            // Se a a posição for nula
+            if (Piece(position) == null)
+            {
+                // Retorne nada
+                return null;
+            }
+            // Variavel auxiliar que recebe a peça da posição informada
+            Piece aux = Piece(position);
+            // Altera a posição da peça para vazia
+            aux.Position = null;
+            // Remove a peça da matriz 
+            _pieces[position.Line, position.Column] = null;
+            // Retorna a variavel auxiliar com a peça
+            return aux;
+        }
+
         // Método para validar se a posição é válida
         public bool ValidPosition(Position position)
         {
