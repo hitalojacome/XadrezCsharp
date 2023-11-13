@@ -1,7 +1,7 @@
 namespace chessboard
 {
     // Responsável pela peça em si
-    public class Piece
+    abstract class Piece
     {
         // Peça tem uma posição | composição
         public Position Position { get; set; } 
@@ -25,5 +25,9 @@ namespace chessboard
         public void SetMoveCount() {
             MoveCount++;
         }
+
+        // Método abstrato não pode ser instanciado na classe pai
+        // Cria uma matriz booleana
+        public abstract bool[,] PossibleMoves();
     }
 }
