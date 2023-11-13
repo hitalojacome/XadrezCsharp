@@ -7,6 +7,7 @@ namespace chess
         public Chessboard Board { get; private set; }
         private int _turn;
         private Color _currentPlayer;
+        public bool GameOver { get; private set; }
 
         // Inicia uma partida de xadrez
         public ChessMatch()
@@ -17,6 +18,8 @@ namespace chess
             _turn = 1;
             // O jodaor inicial é o das peças brancas
             _currentPlayer = Color.White;
+            // Partida inicia com o 'GameOver' falso
+            GameOver = false;
             // Método para inserção de peça
             SetupPieces();
         }

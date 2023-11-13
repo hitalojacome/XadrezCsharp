@@ -9,7 +9,25 @@ namespace xadrez_console {
             try 
             {
                 ChessMatch match = new ChessMatch();
-                Screen.PrintChessboard(match.Board);
+
+                while (!match.GameOver)
+                {
+                    // Limpa o console
+                    Console.Clear();
+                    // Imprime o tabuleiro incial
+                    Screen.PrintChessboard(match.Board);
+                    Console.WriteLine();
+
+                    // Lê a posição que o usuário digitar
+                    Console.Write("Origem: ");
+                    Position origin = Screen.ReedChessPosition().ToPosition();
+                    Console.Write("Destino: ");
+                    Position destination = Screen.ReedChessPosition().ToPosition();
+
+                    match.ExecuteMove(origin, destination);
+
+                }
+
             }
             catch (ChessException e)
             {

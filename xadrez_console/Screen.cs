@@ -1,4 +1,5 @@
 using System;
+using chess;
 using chessboard;
 
 namespace xadrez_console
@@ -31,7 +32,18 @@ namespace xadrez_console
             }
             // Apresentação das colunas
             Console.WriteLine("   A B C D E F G H");
+        }
 
+        // Método responsável por ler a posição da peça
+        public static ChessPosition ReedChessPosition()
+        {
+            // String s receberá o que o usuário inserir
+            string s = Console.ReadLine()!;
+            // Primeira posição da string é a representação da coluna
+            char column = s[0];
+            // Segunda posição da string é a representação da linha
+            int line = int.Parse(s[1] + "");
+            return new ChessPosition(column, line);
         }
 
         // Método estático para impressão de peça com cor personalizada
