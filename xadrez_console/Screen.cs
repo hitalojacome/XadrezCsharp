@@ -11,7 +11,6 @@ namespace xadrez_console
         {
             // Percorre as linhas da matriz
             for(int i=0; i<board.Lines; i++) {
-                // Apresentação das linhas
                 Console.Write($"{8-i}  ");
                 // Percorre as colunas da matriz
                 for(int j=0; j<board.Columns; j++) {
@@ -23,7 +22,7 @@ namespace xadrez_console
                     // SE NÃO
                     else 
                     { 
-                        // Imprime a representação da peça acessada na classe Piece do objeto board
+                        // Faz a impressão da peça conforme o método PrintPiece 
                         PrintPiece(board.Piece(i, j));
                         Console.Write(" ");
                     }
@@ -35,21 +34,23 @@ namespace xadrez_console
 
         }
 
-        // Método estático para impressão personalizada das peças
+        // Método estático para impressão de peça com cor personalizada
         public static void PrintPiece(Piece piece)
         {
-            // SE a cor da peça for branca
+            // Se for branca somente imprima
             if (piece.Color == Color.White)
-            {   
-                // Mostre-a
+            {
                 Console.Write(piece);
             }
-            else  // SE NÃO
+            else 
             {
-                
+                // Váriavel do tipo ConsoleColor que pega a cor atual do console (ForegroundColor)
                 ConsoleColor aux = Console.ForegroundColor;
+                // Altera a cor para Yellow
                 Console.ForegroundColor = ConsoleColor.Yellow;
+                // Imprime a peça amarela
                 Console.Write(piece);
+                // Volta para a cor inicial
                 Console.ForegroundColor = aux;
 
             }
