@@ -8,13 +8,8 @@ namespace xadrez_console {
             
             try 
             {
-                Chessboard board = new Chessboard(8,8);
-
-                board.InsertPiece(new King(board, Color.Black), new Position(0,0));                
-                board.InsertPiece(new King(board, Color.Black), new Position(0,1));
-                board.InsertPiece(new Rook(board, Color.White), new Position(3,5));
-
-                Screen.PrintChessboard(board);          
+                ChessMatch match = new ChessMatch();
+                Screen.PrintChessboard(match.Board);
             }
             catch (ChessException e)
             {
