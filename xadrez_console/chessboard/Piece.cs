@@ -1,7 +1,7 @@
 namespace chessboard
 {
     // Responsável pela peça em si
-    abstract class Piece
+    public abstract class Piece
     {
         // Peça tem uma posição | composição
         public Position Position { get; set; } 

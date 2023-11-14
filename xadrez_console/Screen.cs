@@ -10,28 +10,46 @@ namespace xadrez_console
         // Método estático para imprimir o tabuleiro
         public static void PrintChessboard(Chessboard board)
         {
-            // Percorre as linhas da matriz
             for(int i=0; i<board.Lines; i++) {
-                Console.Write($"{8-i}  ");
-                // Percorre as colunas da matriz
-                for(int j=0; j<board.Columns; j++) {
-                    // SE a localização i,j da matriz estiver vazia
-                    if(board.Piece(i,j) == null) {
-                        // Imprima um hífen para espaços vazios
-                        Console.Write("- ");
-                    } 
-                    // SE NÃO
-                    else 
-                    { 
-                        // Faz a impressão da peça conforme o método PrintPiece 
-                        PrintPiece(board.Piece(i, j));
-                        Console.Write(" ");
-                    }
+                Console.Write(8 - i + " ");
+                for(int j=0; j<board.Columns; j++)
+                {
+                    PrintPiece(board.Piece(i, j));
                 }
                 Console.WriteLine();
             }
             // Apresentação das colunas
-            Console.WriteLine("   A B C D E F G H");
+            Console.WriteLine("  A B C D E F G H");
+        }
+
+        // Sobrecarga para imprimir as posições possiveis da peça
+        public static void PrintChessboard(Chessboard board, bool[,] possiblePositions)
+        {
+            // Guarda a cor original do console
+            ConsoleColor originalBackground = Console.BackgroundColor;
+            // Guarda uma cor alternativa
+            ConsoleColor changedBackground = ConsoleColor.DarkGray;
+
+            for (int i=0; i<board.Lines; i++) {
+                Console.Write(8 - i + " ");
+                for(int j=0; j<board.Columns; j++)
+                {
+                    if (possiblePositions[i,j])
+                    {
+                        Console.BackgroundColor = changedBackground;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = originalBackground;
+                    }
+                    PrintPiece(board.Piece(i, j));
+                    Console.BackgroundColor = originalBackground;
+                }
+                Console.WriteLine();
+            }
+            // Apresentação das colunas
+            Console.WriteLine("  A B C D E F G H");
+            Console.BackgroundColor = originalBackground;
         }
 
         // Método responsável por ler a posição da peça
@@ -49,22 +67,31 @@ namespace xadrez_console
         // Método estático para impressão de peça com cor personalizada
         public static void PrintPiece(Piece piece)
         {
-            // Se for branca somente imprima
-            if (piece.Color == Color.White)
+            // Se a peça for nula
+            if (piece == null)
             {
-                Console.Write(piece);
+                // Imprima um hífen para espaços vazios
+                Console.Write("- ");
             }
-            else 
+            else
             {
-                // Váriavel do tipo ConsoleColor que pega a cor atual do console (ForegroundColor)
-                ConsoleColor aux = Console.ForegroundColor;
-                // Altera a cor para Yellow
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                // Imprime a peça amarela
-                Console.Write(piece);
-                // Volta para a cor inicial
-                Console.ForegroundColor = aux;
-
+                // Se for branca somente imprima
+                if (piece.Color == Color.White)
+                {
+                    Console.Write(piece);
+                }
+                else 
+                {
+                    // Váriavel do tipo ConsoleColor que pega a cor atual do console (ForegroundColor)
+                    ConsoleColor aux = Console.ForegroundColor;
+                    // Altera a cor para Yellow
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    // Imprime a peça amarela
+                    Console.Write(piece);
+                    // Volta para a cor inicial
+                    Console.ForegroundColor = aux;
+                }
+                Console.Write(" ");
             }
         }
     }

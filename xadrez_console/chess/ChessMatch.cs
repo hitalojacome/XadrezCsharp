@@ -56,6 +56,5 @@ namespace chess
             Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('E', 8).ToPosition());
             Board.InsertPiece(new King(Board, Color.Black), new ChessPosition('D', 8).ToPosition());
         }
-    
     }
 }

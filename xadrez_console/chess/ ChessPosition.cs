@@ -16,7 +16,7 @@ namespace chess
 
         // Responsável pela conversão de uma posição interna de matriz para uma posição de um tabuleiro de xadrez (mat- 0,0 = tab- A,1)
         public Position ToPosition() {
-            return new Position(8 - Line, Column - 'A');
+            return new Position(8 - Line, char.ToUpper(Column) - 'A');
         }
 
         public override string ToString()

@@ -13,6 +13,13 @@ namespace chessboard
             Column = column;
         }
 
+        // Método com a mesma finalidade do construtor
+        public void SetValues(int line, int column)
+        {
+            Line = line;
+            Column = column;
+        }
+
         // Método para impressão da posição
         public override string ToString() 
         {
