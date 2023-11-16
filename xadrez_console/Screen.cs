@@ -10,8 +10,9 @@ namespace xadrez_console
         // Método estático para imprimir o tabuleiro
         public static void PrintChessboard(Chessboard board)
         {
-            for(int i=0; i<board.Lines; i++) {
-                Console.Write(8 - i + " ");
+            for(int i=0; i<board.Lines; i++) 
+            {
+                Console.Write($"{8-i} ");
                 for(int j=0; j<board.Columns; j++)
                 {
                     PrintPiece(board.Piece(i, j));
@@ -30,8 +31,9 @@ namespace xadrez_console
             // Guarda uma cor alternativa
             ConsoleColor changedBackground = ConsoleColor.DarkGray;
 
-            for (int i=0; i<board.Lines; i++) {
-                Console.Write(8 - i + " ");
+            for (int i=0; i<board.Lines; i++) 
+            {
+                Console.Write($"{8-i} ");
                 for(int j=0; j<board.Columns; j++)
                 {
                     if (possiblePositions[i,j])

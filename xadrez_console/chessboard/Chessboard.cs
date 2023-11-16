@@ -6,7 +6,7 @@ namespace chessboard
         public int Lines { get; set; }
         public int Columns { get; set; }
         // Um tabuleiro tem uma matriz de peças, somente o tabuleiro pode acessar essas peças
-        private Piece[,] _pieces; 
+        private Piece[,] _pieces;
 
         public Chessboard(int lines, int columns)
         {
@@ -25,7 +25,7 @@ namespace chessboard
         }
 
         // Sobrecarga da classe Piece
-        public Piece Piece(Position position) 
+        public Piece Piece(Position position)
         {
             return _pieces[position.Line, position.Column];
         }

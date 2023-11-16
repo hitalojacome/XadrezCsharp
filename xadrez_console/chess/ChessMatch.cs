@@ -16,7 +16,7 @@ namespace chess
             Board = new Chessboard(8,8);
             // Inicia o turno com 1
             _turn = 1;
-            // O jodaor inicial é o das peças brancas
+            // O jodaor   inicial é o das peças brancas
             _currentPlayer = Color.White;
             // Partida inicia com o 'GameOver' falso
             GameOver = false;

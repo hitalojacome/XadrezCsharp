@@ -12,13 +12,10 @@ namespace xadrez_console {
 
                 while (!match.GameOver)
                 {
-                    // Limpa o console
                     Console.Clear();
-                    // Imprime o tabuleiro incial
                     Screen.PrintChessboard(match.Board);
-                    Console.WriteLine();
 
-                    // Lê a posição que o usuário digitar
+                    Console.WriteLine();
                     Console.Write("Origem: ");
                     Position origin = Screen.ReedChessPosition().ToPosition();
 
