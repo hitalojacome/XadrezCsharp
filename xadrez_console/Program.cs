@@ -14,9 +14,12 @@ namespace xadrez_console {
                 {
                     Console.Clear();
                     Screen.PrintChessboard(match.Board);
+                    Console.WriteLine();
+                    Console.WriteLine($"Turn: {match.Turn}");
+                    Console.WriteLine($"Awaiting Move : {match.CurrentPlayer}");
 
                     Console.WriteLine();
-                    Console.Write("Origem: ");
+                    Console.Write("Origin: ");
                     Position origin = Screen.ReedChessPosition().ToPosition();
 
                     // Conforme a origem informada, é validada suas possiveis posições e armazenadas em uma matriz
@@ -26,10 +29,10 @@ namespace xadrez_console {
                     Screen.PrintChessboard(match.Board, possiblePositions);
                     
                     Console.WriteLine();
-                    Console.Write("Destino: ");
+                    Console.Write("Destination: ");
                     Position destination = Screen.ReedChessPosition().ToPosition();
 
-                    match.ExecuteMove(origin, destination);
+                    match.MakePlay(origin, destination);
                 }
             }
             catch (ChessException e)

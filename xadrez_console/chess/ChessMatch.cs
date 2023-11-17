@@ -5,8 +5,8 @@ namespace chess
     public class ChessMatch
     {
         public Chessboard Board { get; private set; }
-        private int _turn;
-        private Color _currentPlayer;
+        public int Turn { get; private set; }
+        public Color CurrentPlayer { get; private set; }
         public bool GameOver { get; private set; }
 
         // Inicia uma partida de xadrez
@@ -15,9 +15,9 @@ namespace chess
             // Cria um tabuleiro 8x8
             Board = new Chessboard(8,8);
             // Inicia o turno com 1
-            _turn = 1;
+            Turn = 1;
             // O jodaor   inicial é o das peças brancas
-            _currentPlayer = Color.White;
+            CurrentPlayer = Color.White;
             // Partida inicia com o 'GameOver' falso
             GameOver = false;
             // Método para inserção de peça
@@ -35,6 +35,27 @@ namespace chess
             Piece capturedPiece = Board.RemovePiece(destination);
             // Por fim, coloca a peça na posição desejada
             Board.InsertPiece(piece, destination);
+        }
+
+        // Método para fazer a jogada
+        public void MakePlay(Position origin, Position destination)
+        {
+            ExecuteMove(origin, destination);
+            Turn++;
+            ChangePlayer();
+        }
+
+        // Método responsável em alterar o jogador
+        private void ChangePlayer()
+        {
+            if(CurrentPlayer == Color.White)
+            {
+                CurrentPlayer = Color.Black;
+            }
+            else
+            {
+                CurrentPlayer = Color.White;
+            }
         }
 
         // Método para inserção de peças, assim, não se insere as peças no program e já se inicia o tabuleiro
