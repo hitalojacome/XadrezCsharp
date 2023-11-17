@@ -7,7 +7,6 @@ namespace xadrez_console
     // Responsável pela visualização do tabuleiro
     class Screen
     {
-        // Método estático para imprimir o tabuleiro
         public static void PrintChessboard(Chessboard board)
         {
             for(int i=0; i<board.Lines; i++) 
@@ -62,7 +61,7 @@ namespace xadrez_console
             // Primeira posição da string é a representação da coluna
             char column = s[0];
             // Segunda posição da string é a representação da linha
-            int line = int.Parse(s[1] + "");
+            int line = int.Parse($"{s[1]}");
             return new ChessPosition(column, line);
         }
 

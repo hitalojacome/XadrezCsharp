@@ -2,7 +2,7 @@ using chessboard;
 
 namespace chess
 {
-    public class ChessMatch
+    class ChessMatch
     {
         public Chessboard Board { get; private set; }
         public int Turn { get; private set; }
@@ -38,44 +38,61 @@ namespace chess
         }
 
         // Método para fazer a jogada
-        public void MakePlay(Position origin, Position destination)
-        {
+         public void MakePlay(Position origin, Position destination)
+         {
             ExecuteMove(origin, destination);
             Turn++;
             ChangePlayer();
-        }
+         }
 
-        // Método responsável em alterar o jogador
-        private void ChangePlayer()
-        {
-            if(CurrentPlayer == Color.White)
-            {
+        // Validação de posição de origem
+         public void ValidateOriginPosition(Position position)
+         {
+             if(Board.Piece(position) == null)
+             {
+                throw new ChessException("There is no piece in the origin position choose");
+             }
+             if(CurrentPlayer != Board.Piece(position).Color)
+             {
+                throw new ChessException("The piece you chose is not yours!");
+             }
+             if(!Board.Piece(position).HasPossibleMoves())
+             {
+                throw new ChessException("There aren't possible moves for the chosen piece");
+             }
+         }
+
+         // Método responsável em alterar o jogador
+         private void ChangePlayer()
+         {
+             if(CurrentPlayer == Color.White)
+             {
                 CurrentPlayer = Color.Black;
-            }
-            else
-            {
+             }
+             else
+             {
                 CurrentPlayer = Color.White;
-            }
-        }
+             }
+         }
 
         // Método para inserção de peças, assim, não se insere as peças no program e já se inicia o tabuleiro
         private void SetupPieces()
         {
             // Peças brancas
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('C', 1).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('C', 2).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('D', 2).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('E', 2).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('E', 1).ToPosition());
-            Board.InsertPiece(new King(Board, Color.White), new ChessPosition('D', 1).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('c', 1).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('c', 2).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('d', 2).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('e', 2).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('e', 1).ToPosition());
+            Board.InsertPiece(new King(Board, Color.White), new ChessPosition('d', 1).ToPosition());
 
             // Peças pretas
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('C', 7).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('C', 8).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('D', 7).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('E', 7).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('E', 8).ToPosition());
-            Board.InsertPiece(new King(Board, Color.Black), new ChessPosition('D', 8).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('c', 7).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('c', 8).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('d', 7).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('e', 7).ToPosition());
+            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('e', 8).ToPosition());
+            Board.InsertPiece(new King(Board, Color.Black), new ChessPosition('d', 8).ToPosition());
         }
     }
 }

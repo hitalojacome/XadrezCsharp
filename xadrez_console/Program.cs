@@ -12,27 +12,37 @@ namespace xadrez_console {
 
                 while (!match.GameOver)
                 {
-                    Console.Clear();
-                    Screen.PrintChessboard(match.Board);
-                    Console.WriteLine();
-                    Console.WriteLine($"Turn: {match.Turn}");
-                    Console.WriteLine($"Awaiting Move : {match.CurrentPlayer}");
+                    try
+                    {
+                        Console.Clear();
+                        Screen.PrintChessboard(match.Board);
 
-                    Console.WriteLine();
-                    Console.Write("Origin: ");
-                    Position origin = Screen.ReedChessPosition().ToPosition();
+                        Console.WriteLine();
+                        Console.WriteLine($"Turn: {match.Turn}");
+                        Console.WriteLine($"Awaiting Move : {match.CurrentPlayer}");
 
-                    // Conforme a origem informada, é validada suas possiveis posições e armazenadas em uma matriz
-                    bool[,] possiblePositions = match.Board.Piece(origin).PossibleMoves();
+                        Console.WriteLine();
+                        Console.Write("Origin: ");
+                        Position origin = Screen.ReedChessPosition().ToPosition();
+                        match.ValidateOriginPosition(origin);
 
-                    Console.Clear();
-                    Screen.PrintChessboard(match.Board, possiblePositions);
-                    
-                    Console.WriteLine();
-                    Console.Write("Destination: ");
-                    Position destination = Screen.ReedChessPosition().ToPosition();
+                        bool[,] possiblePositions = match.Board.Piece(origin).PossibleMoves();
 
-                    match.MakePlay(origin, destination);
+                        Console.Clear();
+                        Screen.PrintChessboard(match.Board, possiblePositions);
+                        
+                        Console.WriteLine();
+                        Console.Write("Destination: ");
+                        Position destination = Screen.ReedChessPosition().ToPosition();
+
+                        match.MakePlay(origin, destination);
+                    }
+                    catch (ChessException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.Write("Press enter to play again");
+                        Console.ReadLine();
+                    }
                 }
             }
             catch (ChessException e)

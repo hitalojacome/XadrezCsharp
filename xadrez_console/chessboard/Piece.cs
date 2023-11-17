@@ -1,7 +1,7 @@
 namespace chessboard
 {
     // Responsável pela peça em si
-    public abstract class Piece
+    abstract class Piece
     {
         // Peça tem uma posição | composição
         public Position Position { get; set; } 
@@ -24,6 +24,23 @@ namespace chessboard
         // Método para incrementação em cada movimento
         public void SetMoveCount() {
             MoveCount++;
+        }
+
+        // Validação da existencia de possíveis movimentos
+        public bool HasPossibleMoves()
+        {
+            bool[,] matrix = PossibleMoves();
+            for(int i=0; i<Board.Lines; i++) 
+            {
+                for(int j=0; j<Board.Columns; j++) 
+                {
+                    if(matrix[i,j]) 
+                    {
+                        return true;
+                    }
+                }  
+            }
+            return false;
         }
 
         // Método abstrato não pode ser instanciado na classe pai

@@ -1,6 +1,6 @@
 namespace chessboard
 {
-    public enum Color : int
+    enum Color
     {
         White,
         Black

@@ -3,7 +3,7 @@ using chessboard;
 namespace chess
 {
     // Classe que irá personalizar as posições do tabuleiro conforme as posições reais do xadrez
-    public class ChessPosition
+    class ChessPosition
     {
         public char Column { get; set; }
         public int Line { get; set; }
@@ -16,7 +16,7 @@ namespace chess
 
         // Responsável pela conversão de uma posição interna de matriz para uma posição de um tabuleiro de xadrez (mat- 0,0 = tab- A,1)
         public Position ToPosition() {
-            return new Position(8 - Line, char.ToUpper(Column) - 'A');
+            return new Position(8 - Line, char.ToLower(Column) - 'a');
         }
 
         public override string ToString()

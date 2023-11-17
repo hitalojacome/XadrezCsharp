@@ -1,7 +1,7 @@
 namespace chessboard
 {
     // Responsável pela posição no tabuleiro
-    public class Position
+    class Position
     {
         // A posição é composta por linha e coluna
         public int Line { get; set; }

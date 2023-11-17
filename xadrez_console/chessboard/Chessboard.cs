@@ -1,18 +1,16 @@
 namespace chessboard
 {
     // Classe do tabuleiro
-    public class Chessboard
+    class Chessboard
     {
         public int Lines { get; set; }
         public int Columns { get; set; }
-        // Um tabuleiro tem uma matriz de peças, somente o tabuleiro pode acessar essas peças
         private Piece[,] _pieces;
 
         public Chessboard(int lines, int columns)
         {
             Lines = lines;
             Columns = columns;
-            // Instancia a matriz de peças com base nas linhas e colunas passadas como argumentos
             _pieces = new Piece[lines, columns];
         }
 
@@ -78,7 +76,7 @@ namespace chessboard
             /* SE o valor de linha for menor que 0 ou maior que a quantidade em linhas
             OU SE o valor de coluna for menor que 0 ou maior que a quantidade em colunas */
             // linha e coluna = atributos Position || linhas e colunas = atributos Chessboard
-            if (position.Line<0 || position.Line>=Lines || position.Column<0 || position.Column>=Columns) 
+            if (position.Line < 0 || position.Line >= Lines || position.Column < 0 || position.Column >= Columns)
             {
                 return false;
             }
