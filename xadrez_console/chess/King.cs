@@ -28,63 +28,63 @@ namespace chess
         public override bool[,] PossibleMoves() 
         {
             // Cria uma nova matriz do tamanho do tabuleiro
-            bool[,] matrix = new bool [Board.Lines, Board.Columns];
-            Position position = new (0,0);
+            bool[,] matrix = new bool[Board.Lines, Board.Columns];
+            Position pos = new (0,0);
 
             // Movimenta para Norte
-            position.SetValues(position.Line - 1, position.Column);
-            if (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line - 1, Position.Column);
+            if (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.Line, pos.Column] = true;
             }
 
             // Movimenta para Nordeste
-            position.SetValues(position.Line - 1, position.Column + 1);
-            if (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line - 1, Position.Column + 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.Line, pos.Column] = true;
             }
 
             // Movimenta para Leste
-            position.SetValues(position.Line, position.Column + 1);
-            if (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line, Position.Column + 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.Line, pos.Column] = true;
             }
 
             // Movimenta para Sudeste
-            position.SetValues(position.Line + 1, position.Column + 1);
-            if (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line + 1, Position.Column + 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.Line, pos.Column] = true;
             }
 
             // Movimenta para Sul
-            position.SetValues(position.Line + 1, position.Column);
-            if (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line + 1, Position.Column);
+            if (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.Line, pos.Column] = true;
             }
 
             // Movimenta para Sudoeste
-            position.SetValues(position.Line + 1, position.Column - 1);
-            if (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line + 1, Position.Column - 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.Line, pos.Column] = true;
             }
 
             // Movimenta para Oeste
-            position.SetValues(position.Line, position.Column - 1);
-            if (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line, Position.Column - 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.Line, pos.Column] = true;
             }
 
             // Movimenta para Noroeste
-            position.SetValues(position.Line - 1, position.Column - 1);
-            if (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line - 1, Position.Column - 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.Line, pos.Column] = true;
             }
 
             return matrix;

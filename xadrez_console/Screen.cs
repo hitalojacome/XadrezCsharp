@@ -1,6 +1,6 @@
 using System;
-using chess;
 using chessboard;
+using chess;
 
 namespace xadrez_console
 {

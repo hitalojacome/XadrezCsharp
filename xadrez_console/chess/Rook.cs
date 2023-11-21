@@ -28,55 +28,55 @@ namespace chess
         public override bool[,] PossibleMoves() 
         {
             // Cria uma nova matriz do tamanho do tabuleiro
-            bool[,] matrix = new bool [Board.Lines, Board.Columns];
-            Position position = new (0,0);
+            bool[,] matrix = new bool[Board.Lines, Board.Columns];
+            Position pos = new (0,0);
 
             // Movimenta para Norte
-            position.SetValues(position.Line - 1, position.Column);
-            while (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line - 1, Position.Column);
+            while (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
-                if (Board.Piece(position) != null && Board.Piece(position).Color != Color)
+                matrix[pos.Line, pos.Column] = true;
+                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color)
                 {
                     break;
                 }
-                position.Line--;
+                pos.Line--;
             }
 
             // Movimenta para Leste
-            position.SetValues(position.Line, position.Column + 1);
-            while (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line, Position.Column + 1);
+            while (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
-                if (Board.Piece(position) != null && Board.Piece(position).Color != Color)
+                matrix[pos.Line, pos.Column] = true;
+                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color)
                 {
                     break;
                 }
-                position.Column++;
+                pos.Column++;
             }
 
             // Movimenta para Sul
-            position.SetValues(position.Line + 1, position.Column);
-            while (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line + 1, Position.Column);
+            while (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
-                if (Board.Piece(position) != null && Board.Piece(position).Color != Color)
+                matrix[pos.Line, pos.Column] = true;
+                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color)
                 {
                     break;
                 }
-                position.Line++;
+                pos.Line++;
             }
 
             // Movimenta para Oeste
-            position.SetValues(position.Line, position.Column - 1);
-            while (Board.ValidPosition(position) && CanMove(position))
+            pos.SetValues(Position.Line, Position.Column - 1);
+            while (Board.ValidPosition(pos) && CanMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
-                if (Board.Piece(position) != null && Board.Piece(position).Color != Color)
+                matrix[pos.Line, pos.Column] = true;
+                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color)
                 {
                     break;
                 }
-                position.Column--;
+                pos.Column--;
             }
 
             return matrix;
