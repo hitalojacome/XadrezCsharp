@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using chessboard;
 
 namespace chess
@@ -8,6 +9,9 @@ namespace chess
         public int Turn { get; private set; }
         public Color CurrentPlayer { get; private set; }
         public bool GameOver { get; private set; }
+        // Criação de conjuntos para armazenar todas as peças e as peças capturadas
+        private HashSet<Piece> pieces;
+        private HashSet<Piece> capturedPieces;
 
         // Inicia uma partida de xadrez
         public ChessMatch()
@@ -20,6 +24,8 @@ namespace chess
             CurrentPlayer = Color.White;
             // Partida inicia com o 'GameOver' falso
             GameOver = false;
+            pieces = new HashSet<Piece>();
+            capturedPieces = new HashSet<Piece>();
             // Método para inserção de peça
             SetupPieces();
         }
@@ -35,6 +41,10 @@ namespace chess
             Piece capturedPiece = Board.RemovePiece(destination);
             // Por fim, coloca a peça na posição desejada
             Board.InsertPiece(piece, destination);
+            if (capturedPiece != null)
+            {
+                capturedPieces.Add(capturedPiece);
+            }
         }
 
         // Método para fazer a jogada
@@ -72,9 +82,9 @@ namespace chess
          }
          
 
-         // Método responsável em alterar o jogador
-         private void ChangePlayer()
-         {
+        // Método responsável em alterar o jogador
+        private void ChangePlayer()
+        {
             if(CurrentPlayer == Color.White)
             {
                 CurrentPlayer = Color.Black;
@@ -83,26 +93,63 @@ namespace chess
             {
                 CurrentPlayer = Color.White;
             }
-         }
+        }
+
+        // Retorna a quantidade de paças captuir
+        public HashSet<Piece> CapturedPieces(Color color)
+        {
+            HashSet<Piece> aux = new ();
+            foreach(Piece x in capturedPieces)
+            {
+                if(x.Color == color)
+                {
+                    aux.Add(x);
+                }
+            }
+            return aux;
+        }
+
+        // Retorna quantas peças ainda existem no jogo
+        public HashSet<Piece> PieceInGame(Color color)
+        {
+            HashSet<Piece> aux = new();
+            foreach(Piece x in pieces)
+            {
+                if(x.Color == color)
+                {
+                    aux.Add(x);
+                }
+            }
+            // As peças de tal cor EXCETO as capturadas
+            aux.ExceptWith(CapturedPieces(color));
+            return aux;
+        }
+
+        // Método para inserir a peça no conjunto
+        public void InsertNewPiece(char column, int line, Piece piece)
+        {
+            Board.InsertPiece(piece, new ChessPosition(column, line).ToPosition());
+            pieces.Add(piece);
+        }
 
         // Método para inserção de peças, assim, não se insere as peças no program e já se inicia o tabuleiro
         private void SetupPieces()
         {
             // Peças brancas
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('c', 1).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('c', 2).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('d', 2).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('e', 2).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.White), new ChessPosition('e', 1).ToPosition());
-            Board.InsertPiece(new King(Board, Color.White), new ChessPosition('d', 1).ToPosition());
+            InsertNewPiece('c', 1, new Rook(Board, Color.White));
+            InsertNewPiece('c', 2, new Rook(Board, Color.White));
+            InsertNewPiece('d', 2, new Rook(Board, Color.White));
+            InsertNewPiece('e', 2, new Rook(Board, Color.White));
+            InsertNewPiece('e', 1, new Rook(Board, Color.White));
+            InsertNewPiece('d', 1, new King(Board, Color.White));
 
             // Peças pretas
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('c', 7).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('c', 8).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('d', 7).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('e', 7).ToPosition());
-            Board.InsertPiece(new Rook(Board, Color.Black), new ChessPosition('e', 8).ToPosition());
-            Board.InsertPiece(new King(Board, Color.Black), new ChessPosition('d', 8).ToPosition());
+            InsertNewPiece('c', 7, new Rook(Board, Color.Black));
+            InsertNewPiece('c', 8, new Rook(Board, Color.Black));
+            InsertNewPiece('d', 7, new Rook(Board, Color.Black));
+            InsertNewPiece('e', 7, new Rook(Board, Color.Black));
+            InsertNewPiece('e', 8, new Rook(Board, Color.Black));
+            InsertNewPiece('d', 8, new King(Board, Color.Black));
         }
     }
 }

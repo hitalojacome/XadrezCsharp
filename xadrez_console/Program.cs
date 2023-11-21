@@ -15,11 +15,7 @@ namespace xadrez_console {
                     try
                     {
                         Console.Clear();
-                        Screen.PrintChessboard(match.Board);
-
-                        Console.WriteLine();
-                        Console.WriteLine($"Turn: {match.Turn}");
-                        Console.WriteLine($"Awaiting Move : {match.CurrentPlayer}");
+                        Screen.PrintMatch(match);
 
                         Console.WriteLine();
                         Console.Write("Origin: ");

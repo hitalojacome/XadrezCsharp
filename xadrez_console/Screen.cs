@@ -7,6 +7,46 @@ namespace xadrez_console
     // Responsável pela visualização do tabuleiro
     class Screen
     {
+        // Método imprime a partida
+        public static void PrintMatch(ChessMatch match)
+        {
+            PrintChessboard(match.Board);
+            Console.WriteLine();
+            if(match.Turn > 1)
+            {
+                PrintCapturedPieces(match);
+            }
+            Console.WriteLine($"Turn: {match.Turn}");
+            Console.WriteLine($"Awaiting Move: {match.CurrentPlayer}");
+        }
+
+        // Método imprime todas as peças capturadas
+        public static void PrintCapturedPieces(ChessMatch match)
+        {
+            Console.WriteLine("Captured pieces:");
+            Console.Write("White: ");
+            PrintSet(match.CapturedPieces(Color.White));
+            Console.WriteLine();
+            Console.Write("Black: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            PrintSet(match.CapturedPieces(Color.Black));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+
+        // Lógicas para imprimir o conjunto de peças caputradas
+        public static void PrintSet(HashSet<Piece> set)
+        {
+            Console.Write("[");
+            foreach(Piece piece in set)
+            {
+                Console.Write($"{piece}, ");
+            }
+            Console.Write("]");
+        }
+
         public static void PrintChessboard(Chessboard board)
         {
             for(int i=0; i<board.Lines; i++) 
