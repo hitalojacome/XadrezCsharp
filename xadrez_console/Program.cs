@@ -9,7 +9,6 @@ namespace xadrez_console {
             try 
             {
                 ChessMatch match = new();
-
                 while (!match.GameOver)
                 {
                     try
@@ -37,6 +36,7 @@ namespace xadrez_console {
                     catch (ChessException e)
                     {
                         Console.WriteLine(e.Message);
+                        Console.WriteLine();
                         Console.Write("Press enter to play again");
                         Console.ReadLine();
                     }

@@ -12,6 +12,8 @@ namespace chess
         // Criação de conjuntos para armazenar todas as peças e as peças capturadas
         private HashSet<Piece> pieces;
         private HashSet<Piece> capturedPieces;
+        // Informa se está em xeque
+        public bool Check { get; private set ;}
 
         // Inicia uma partida de xadrez
         public ChessMatch()
@@ -24,14 +26,18 @@ namespace chess
             CurrentPlayer = Color.White;
             // Partida inicia com o 'GameOver' falso
             GameOver = false;
+            // Inicia sem xeque
+            Check = false;
+            // Armazena todas as peças
             pieces = new HashSet<Piece>();
+            // Armazena as peças capturadas
             capturedPieces = new HashSet<Piece>();
             // Método para inserção de peça
             SetupPieces();
         }
 
         // Método para a execução dos movimentos, ele recebe a posição atual da peça, e a que deseja mover
-        public void ExecuteMove(Position origin, Position destination)
+        public Piece ExecuteMove(Position origin, Position destination)
         {
             // Remove a peça da posição atual
             Piece piece = Board.RemovePiece(origin);
@@ -45,12 +51,50 @@ namespace chess
             {
                 capturedPieces.Add(capturedPiece);
             }
+            return capturedPiece;
+        }
+
+        // Método para desfazer o movimento
+        public void ReverseMove(Position origin, Position destination, Piece capturedPiece)
+        {
+            // A peça é removida do destino
+            Piece piece = Board.RemovePiece(destination);
+            // Se tiver uma peça no local
+            // Decrementa o movimento
+            piece.UndoMoveCount();
+            if(capturedPiece != null)
+            {
+                // Volta a peça capturada a sua posição
+                Board.InsertPiece(capturedPiece, destination);
+                // Remove a peça capturada do conjunto
+                capturedPieces.Remove(capturedPiece);
+            }
+            // Insere a peça novamente a sua posição de origem
+            Board.InsertPiece(piece, origin);
         }
 
         // Método para fazer a jogada
          public void MakePlay(Position origin, Position destination)
          {
-            ExecuteMove(origin, destination);
+            Piece capturedPiece = ExecuteMove(origin, destination);
+
+            // SE a jogada deixar o jogador atual em xeque
+            if(IsCheck(CurrentPlayer))
+            {
+                // Reverte todo o movimento
+                ReverseMove(origin, destination, capturedPiece);
+                throw new ChessException("You cannot put yourself in check!");
+            }
+
+            // SE o oponente do jogador atual estiver em xeque
+            if(IsCheck(Opponent(CurrentPlayer)))
+            {
+                Check = true;
+            }
+            else
+            {
+                Check = false;
+            }
             Turn++;
             ChangePlayer();
          }
@@ -123,6 +167,58 @@ namespace chess
             // As peças de tal cor EXCETO as capturadas
             aux.ExceptWith(CapturedPieces(color));
             return aux;
+        }
+
+        // Determina quem é o adversário
+        private Color Opponent(Color color)
+        {
+            if(color == Color.White)
+            {
+                return Color.Black;
+            }
+            else
+            {
+                return Color.White;
+            }
+        }
+
+        // Retorna o rei 
+        private Piece King(Color color)
+        {
+            // Para cada peça em jogo
+            foreach (Piece piece in PieceInGame(color))
+            {
+                // Se a peça for Rei, retorne-a
+                if(piece is King)
+                {
+                    return piece;
+                }
+            }
+            return null;
+        }
+
+        // Retorna todas os possíveis movimentos do jogo
+        public bool IsCheck(Color color)
+        {
+            // Cria o rei e verifica se tem ou não um rei no tabuleiro
+            Piece R = King(color);
+            if(R == null) 
+            {
+                throw new ChessException($"There is no {color} king on the board.");
+            }
+            // Para cada peça em jogo que for oponente
+            foreach(Piece piece in PieceInGame(Opponent(color)))
+            {
+                // Cria uma matriz dos possiveis movimentos
+                bool[,] matrix = piece.PossibleMoves();
+                // Se existir um rei em alguma das posições possiveis
+                if(matrix[R.Position.Line, R.Position.Column])
+                {
+                    // Está em xeque
+                    return true;
+                }
+            }
+            return false;
         }
 
         // Método para inserir a peça no conjunto

@@ -26,6 +26,10 @@ namespace chessboard
             MoveCount++;
         }
 
+        public void UndoMoveCount() {
+            MoveCount--;
+        }
+
         // Validação da existencia de possíveis movimentos
         public bool HasPossibleMoves()
         {

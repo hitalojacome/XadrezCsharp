@@ -18,6 +18,10 @@ namespace xadrez_console
             }
             Console.WriteLine($"Turn: {match.Turn}");
             Console.WriteLine($"Awaiting Move: {match.CurrentPlayer}");
+            if(match.Check)
+            {
+                Console.WriteLine("CHECK!");
+            }
         }
 
         // Método imprime todas as peças capturadas
