@@ -43,6 +43,12 @@ namespace chessboard
             return false;
         }
 
+        // Método verifica se pode mover a peça para a posição informada
+        public bool CanMoveTo(Position position)
+        {
+            return PossibleMoves()[position.Line, position.Column];
+        }
+
         // Método abstrato não pode ser instanciado na classe pai
         // Cria uma matriz booleana
         public abstract bool[,] PossibleMoves();

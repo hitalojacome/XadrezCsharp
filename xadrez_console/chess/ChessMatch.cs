@@ -50,29 +50,39 @@ namespace chess
          {
              if(Board.Piece(position) == null)
              {
-                throw new ChessException("There is no piece in the origin position choose");
+                throw new ChessException("There is no piece in the chosen starting position!");
              }
              if(CurrentPlayer != Board.Piece(position).Color)
              {
-                throw new ChessException("The piece you chose is not yours!");
+                throw new ChessException("The chosen piece is not yours!");
              }
              if(!Board.Piece(position).HasPossibleMoves())
              {
-                throw new ChessException("There aren't possible moves for the chosen piece");
+                throw new ChessException("There are no possible moves for the chosen piece!");
              }
          }
+
+         // Validação de posição de destino
+         public void ValidateDestinationPosition(Position origin, Position destination)
+         {
+            if(!Board.Piece(origin).CanMoveTo(destination))
+            {
+                throw new ChessException("Invalid destination position!");
+            }
+         }
+         
 
          // Método responsável em alterar o jogador
          private void ChangePlayer()
          {
-             if(CurrentPlayer == Color.White)
-             {
+            if(CurrentPlayer == Color.White)
+            {
                 CurrentPlayer = Color.Black;
-             }
-             else
-             {
+            }
+            else
+            {
                 CurrentPlayer = Color.White;
-             }
+            }
          }
 
         // Método para inserção de peças, assim, não se insere as peças no program e já se inicia o tabuleiro

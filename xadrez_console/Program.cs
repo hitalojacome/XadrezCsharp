@@ -34,6 +34,7 @@ namespace xadrez_console {
                         Console.WriteLine();
                         Console.Write("Destination: ");
                         Position destination = Screen.ReedChessPosition().ToPosition();
+                        match.ValidateDestinationPosition(origin, destination);
 
                         match.MakePlay(origin, destination);
                     }
