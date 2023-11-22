@@ -36,11 +36,13 @@ namespace xadrez_console
         public static void PrintCapturedPieces(ChessMatch match)
         {
             Console.WriteLine("Captured pieces:");
-            Console.Write("White: ");
-            PrintSet(match.CapturedPieces(Color.White));
+            Console.Write("Green: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Green;
+            PrintSet(match.CapturedPieces(Color.Green));
+            Console.ForegroundColor = aux;
             Console.WriteLine();
             Console.Write("Black: ");
-            ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Yellow;
             PrintSet(match.CapturedPieces(Color.Black));
             Console.ForegroundColor = aux;
@@ -129,9 +131,12 @@ namespace xadrez_console
             else
             {
                 // Se for branca somente imprima
-                if (piece.Color == Color.White)
+                if (piece.Color == Color.Green)
                 {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(piece);
+                    Console.ForegroundColor = aux;
                 }
                 else 
                 {

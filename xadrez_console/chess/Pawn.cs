@@ -31,7 +31,7 @@ namespace chess
             bool[,] matrix = new bool[Board.Lines, Board.Columns];
             Position pos = new (0,0);   
 
-            if (Color == Color.White)
+            if (Color == Color.Green)
             {
                 pos.SetValues(Position.Line - 1, Position.Column);
                 if (Board.ValidPosition(pos) && Free(pos))
