@@ -36,7 +36,7 @@ namespace xadrez_console
         public static void PrintCapturedPieces(ChessMatch match)
         {
             Console.WriteLine("Captured pieces:");
-            Console.Write("Green: ");
+            Console.Write("White: ");
             ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
             PrintSet(match.CapturedPieces(Color.Green));

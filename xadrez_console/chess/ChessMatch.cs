@@ -51,6 +51,27 @@ namespace chess
             {
                 capturedPieces.Add(capturedPiece);
             }
+
+            // #jogadaespecial ROQUE PEQUENO
+            if(piece is King && destination.Column == origin.Column + 2)
+            {
+                Position rookOrigin = new (origin.Line, origin.Column + 3);
+                Position rookDestiny = new (origin.Line, origin.Column + 1);
+                Piece T = Board.RemovePiece(rookOrigin);
+                T.SetMoveCount();
+                Board.InsertPiece(T, rookDestiny);
+            }
+
+            // #jogadaespecial ROQUE GRANDE
+            if(piece is King && destination.Column == origin.Column - 2)
+            {
+                Position rookOrigin = new (origin.Line, origin.Column - 4);
+                Position rookDestiny = new (origin.Line, origin.Column - 1);
+                Piece T = Board.RemovePiece(rookOrigin);
+                T.SetMoveCount();
+                Board.InsertPiece(T, rookDestiny);
+            }
+
             return capturedPiece;
         }
 
@@ -71,6 +92,26 @@ namespace chess
             }
             // Insere a peça novamente a sua posição de origem
             Board.InsertPiece(piece, origin);
+
+            // #jogadaespecial ROQUE PEQUENO
+            if(piece is King && destination.Column == origin.Column + 2)
+            {
+                Position rookOrigin = new (origin.Line, origin.Column + 3);
+                Position rookDestiny = new (origin.Line, origin.Column + 1);
+                Piece T = Board.RemovePiece(rookDestiny);
+                T.UndoMoveCount();
+                Board.InsertPiece(T, rookOrigin);
+            }
+
+            // #jogadaespecial ROQUE GRANDE
+            if(piece is King && destination.Column == origin.Column - 2)
+            {
+                Position rookOrigin = new (origin.Line, origin.Column - 4);
+                Position rookDestiny = new (origin.Line, origin.Column - 1);
+                Piece T = Board.RemovePiece(rookDestiny);
+                T.UndoMoveCount();
+                Board.InsertPiece(T, rookOrigin);
+            }
         }
 
         // Método para fazer a jogada
@@ -281,7 +322,7 @@ namespace chess
             InsertNewPiece('b', 1, new Knight(Board, Color.Green));
             InsertNewPiece('c', 1, new Bishop(Board, Color.Green));
             InsertNewPiece('d', 1, new Queen(Board, Color.Green));
-            InsertNewPiece('e', 1, new King(Board, Color.Green));
+            InsertNewPiece('e', 1, new King(Board, Color.Green, this));
             InsertNewPiece('f', 1, new Bishop(Board, Color.Green));
             InsertNewPiece('g', 1, new Knight(Board, Color.Green));
             InsertNewPiece('h', 1, new Rook(Board, Color.Green));
@@ -299,7 +340,7 @@ namespace chess
             InsertNewPiece('b', 8, new Knight(Board, Color.Black));
             InsertNewPiece('c', 8, new Bishop(Board, Color.Black));
             InsertNewPiece('d', 8, new Queen(Board, Color.Black));
-            InsertNewPiece('e', 8, new King(Board, Color.Black));
+            InsertNewPiece('e', 8, new King(Board, Color.Black, this));
             InsertNewPiece('f', 8, new Bishop(Board, Color.Black));
             InsertNewPiece('g', 8, new Knight(Board, Color.Black));
             InsertNewPiece('h', 8, new Rook(Board, Color.Black));
