@@ -14,6 +14,7 @@ namespace chess
         private HashSet<Piece> capturedPieces;
         // Informa se está em xeque
         public bool Check { get; private set ;}
+        public Piece VulnerableEnPassant { get; private set; }
 
         // Inicia uma partida de xadrez
         public ChessMatch()
@@ -28,6 +29,7 @@ namespace chess
             GameOver = false;
             // Inicia sem xeque
             Check = false;
+            VulnerableEnPassant = null;
             // Armazena todas as peças
             pieces = new HashSet<Piece>();
             // Armazena as peças capturadas
@@ -115,8 +117,8 @@ namespace chess
         }
 
         // Método para fazer a jogada
-         public void MakePlay(Position origin, Position destination)
-         {
+        public void MakePlay(Position origin, Position destination)
+        {
             Piece capturedPiece = ExecuteMove(origin, destination);
 
             // SE a jogada deixar o jogador atual em xeque
@@ -148,11 +150,23 @@ namespace chess
                 Turn++;
                 ChangePlayer();
             }
-         }
+
+            Piece piece = Board.Piece(destination);
+
+            // #jogadaespecial EN PASSANT
+            if (piece is Pawn && (destination.Line == origin.Line - 2 || destination.Line == origin.Line + 2))
+            {  
+                VulnerableEnPassant = piece;
+            }
+            else
+            {
+                VulnerableEnPassant = null;
+            }
+        }
 
         // Validação de posição de origem
-         public void ValidateOriginPosition(Position position)
-         {
+        public void ValidateOriginPosition(Position position)
+        {
              if(Board.Piece(position) == null)
              {
                 throw new ChessException("There is no piece in the chosen starting position!");
@@ -165,16 +179,16 @@ namespace chess
              {
                 throw new ChessException("There are no possible moves for the chosen piece!");
              }
-         }
+        }
 
          // Validação de posição de destino
-         public void ValidateDestinationPosition(Position origin, Position destination)
-         {
+        public void ValidateDestinationPosition(Position origin, Position destination)
+        {
             if(!Board.Piece(origin).PossibleMove(destination))
             {
                 throw new ChessException("Invalid destination position!");
             }
-         }
+        }
          
 
         // Método responsável em alterar o jogador
@@ -326,14 +340,14 @@ namespace chess
             InsertNewPiece('f', 1, new Bishop(Board, Color.Green));
             InsertNewPiece('g', 1, new Knight(Board, Color.Green));
             InsertNewPiece('h', 1, new Rook(Board, Color.Green));
-            InsertNewPiece('a', 2, new Pawn(Board, Color.Green));
-            InsertNewPiece('b', 2, new Pawn(Board, Color.Green));
-            InsertNewPiece('c', 2, new Pawn(Board, Color.Green));
-            InsertNewPiece('d', 2, new Pawn(Board, Color.Green));
-            InsertNewPiece('e', 2, new Pawn(Board, Color.Green));
-            InsertNewPiece('f', 2, new Pawn(Board, Color.Green));
-            InsertNewPiece('g', 2, new Pawn(Board, Color.Green));
-            InsertNewPiece('h', 2, new Pawn(Board, Color.Green));
+            InsertNewPiece('a', 2, new Pawn(Board, Color.Green, this));
+            InsertNewPiece('b', 2, new Pawn(Board, Color.Green, this));
+            InsertNewPiece('c', 2, new Pawn(Board, Color.Green, this));
+            InsertNewPiece('d', 2, new Pawn(Board, Color.Green, this));
+            InsertNewPiece('e', 2, new Pawn(Board, Color.Green, this));
+            InsertNewPiece('f', 2, new Pawn(Board, Color.Green, this));
+            InsertNewPiece('g', 2, new Pawn(Board, Color.Green, this));
+            InsertNewPiece('h', 2, new Pawn(Board, Color.Green, this));
 
             // Peças pretas
             InsertNewPiece('a', 8, new Rook(Board, Color.Black));
@@ -344,14 +358,14 @@ namespace chess
             InsertNewPiece('f', 8, new Bishop(Board, Color.Black));
             InsertNewPiece('g', 8, new Knight(Board, Color.Black));
             InsertNewPiece('h', 8, new Rook(Board, Color.Black));
-            InsertNewPiece('a', 7, new Pawn(Board, Color.Black));
-            InsertNewPiece('b', 7, new Pawn(Board, Color.Black));
-            InsertNewPiece('c', 7, new Pawn(Board, Color.Black));
-            InsertNewPiece('d', 7, new Pawn(Board, Color.Black));
-            InsertNewPiece('e', 7, new Pawn(Board, Color.Black));
-            InsertNewPiece('f', 7, new Pawn(Board, Color.Black));
-            InsertNewPiece('g', 7, new Pawn(Board, Color.Black));
-            InsertNewPiece('h', 7, new Pawn(Board, Color.Black));
+            InsertNewPiece('a', 7, new Pawn(Board, Color.Black, this));
+            InsertNewPiece('b', 7, new Pawn(Board, Color.Black, this));
+            InsertNewPiece('c', 7, new Pawn(Board, Color.Black, this));
+            InsertNewPiece('d', 7, new Pawn(Board, Color.Black, this));
+            InsertNewPiece('e', 7, new Pawn(Board, Color.Black, this));
+            InsertNewPiece('f', 7, new Pawn(Board, Color.Black, this));
+            InsertNewPiece('g', 7, new Pawn(Board, Color.Black, this));
+            InsertNewPiece('h', 7, new Pawn(Board, Color.Black, this));
         }
     }
 }
