@@ -17,10 +17,18 @@ namespace xadrez_console
                 PrintCapturedPieces(match);
             }
             Console.WriteLine($"Turn: {match.Turn}");
-            Console.WriteLine($"Awaiting Move: {match.CurrentPlayer}");
-            if(match.Check)
+            if(!match.GameOver)
             {
-                Console.WriteLine("CHECK!");
+                Console.WriteLine($"Awaiting Move: {match.CurrentPlayer}");
+                if(match.Check)
+                {
+                    Console.WriteLine("CHECK!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine($"Winner: {match.CurrentPlayer}");
             }
         }
 

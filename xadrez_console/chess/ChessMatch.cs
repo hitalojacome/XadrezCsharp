@@ -95,8 +95,18 @@ namespace chess
             {
                 Check = false;
             }
-            Turn++;
-            ChangePlayer();
+
+            // Se a peça do oponente estiver em xequemate
+            if(CheckmateTest(Opponent(CurrentPlayer)))
+            {
+                // Finaliza o jogo
+                GameOver = true;
+            }
+            else
+            {
+                Turn++;
+                ChangePlayer();
+            }
          }
 
         // Validação de posição de origem
@@ -221,6 +231,41 @@ namespace chess
             return false;
         }
 
+        // Método que testa se a peça está em xequemate
+        public bool CheckmateTest(Color color)
+        {   
+            // Se a peça não estiver em xeque
+            if(!IsCheck(color))
+            {
+                // Não está em xequemate
+                return false;
+            }
+
+            foreach(Piece piece in PieceInGame(color))
+            {
+                bool[,] matrix = piece.PossibleMoves();
+                for(int i = 0; i < Board.Lines; i++) 
+                {
+                    for(int j = 0; j < Board.Columns; j++) 
+                    {
+                        if(matrix[i,j])
+                        {
+                            Position origin = piece.Position;
+                            Position destination = new (i,j);
+                            Piece capturedPiece = ExecuteMove(origin, destination);
+                            bool checkTest = IsCheck(color);
+                            ReverseMove(origin, destination, capturedPiece);
+                            if(!checkTest)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         // Método para inserir a peça no conjunto
         public void InsertNewPiece(char column, int line, Piece piece)
         {
@@ -232,20 +277,20 @@ namespace chess
         private void SetupPieces()
         {
             // Peças brancas
+            InsertNewPiece('h', 7, new Rook(Board, Color.White));
             InsertNewPiece('c', 1, new Rook(Board, Color.White));
-            InsertNewPiece('c', 2, new Rook(Board, Color.White));
-            InsertNewPiece('d', 2, new Rook(Board, Color.White));
-            InsertNewPiece('e', 2, new Rook(Board, Color.White));
-            InsertNewPiece('e', 1, new Rook(Board, Color.White));
+            //InsertNewPiece('d', 2, new Rook(Board, Color.White));
+            //InsertNewPiece('e', 2, new Rook(Board, Color.White));
+            //InsertNewPiece('e', 1, new Rook(Board, Color.White));
             InsertNewPiece('d', 1, new King(Board, Color.White));
 
             // Peças pretas
-            InsertNewPiece('c', 7, new Rook(Board, Color.Black));
-            InsertNewPiece('c', 8, new Rook(Board, Color.Black));
-            InsertNewPiece('d', 7, new Rook(Board, Color.Black));
-            InsertNewPiece('e', 7, new Rook(Board, Color.Black));
-            InsertNewPiece('e', 8, new Rook(Board, Color.Black));
-            InsertNewPiece('d', 8, new King(Board, Color.Black));
+            InsertNewPiece('b', 8, new Rook(Board, Color.Black));
+            //InsertNewPiece('c', 8, new Rook(Board, Color.Black));
+            //InsertNewPiece('d', 7, new Rook(Board, Color.Black));
+            //InsertNewPiece('e', 7, new Rook(Board, Color.Black));
+            //InsertNewPiece('e', 8, new Rook(Board, Color.Black));
+            InsertNewPiece('a', 8, new King(Board, Color.Black));
         }
     }
 }
