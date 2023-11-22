@@ -48,7 +48,7 @@ namespace chessboard
         }
 
         // Método verifica se pode mover a peça para a posição informada
-        public bool CanMoveTo(Position position)
+        public bool PossibleMove(Position position)
         {
             return PossibleMoves()[position.Line, position.Column];
         }
