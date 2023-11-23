@@ -155,7 +155,7 @@ namespace chess
 
             // #jogadaespecial EN PASSANT
             if (piece is Pawn && (destination.Line == origin.Line - 2 || destination.Line == origin.Line + 2))
-            {  
+            {
                 VulnerableEnPassant = piece;
             }
             else
@@ -189,7 +189,6 @@ namespace chess
                 throw new ChessException("Invalid destination position!");
             }
         }
-         
 
         // Método responsável em alterar o jogador
         private void ChangePlayer()
@@ -247,7 +246,7 @@ namespace chess
             }
         }
 
-        // Retorna o rei 
+        // Retorna o rei
         private Piece King(Color color)
         {
             // Para cada peça em jogo
@@ -288,7 +287,7 @@ namespace chess
 
         // Método que testa se a peça está em xequemate
         public bool CheckmateTest(Color color)
-        {   
+        {
             // Se a peça não estiver em xeque
             if(!IsCheck(color))
             {
@@ -299,9 +298,9 @@ namespace chess
             foreach(Piece piece in PieceInGame(color))
             {
                 bool[,] matrix = piece.PossibleMoves();
-                for(int i = 0; i < Board.Lines; i++) 
+                for(int i = 0; i < Board.Lines; i++)
                 {
-                    for(int j = 0; j < Board.Columns; j++) 
+                    for(int j = 0; j < Board.Columns; j++)
                     {
                         if(matrix[i,j])
                         {

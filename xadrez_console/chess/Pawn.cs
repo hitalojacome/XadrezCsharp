@@ -2,7 +2,7 @@ using chessboard;
 
 namespace chess
 {
-    // Representação do Peão no xadrez*/
+    // Representação do Peão no xadrez
     class Pawn : Piece
     {
         private ChessMatch match;
@@ -12,7 +12,7 @@ namespace chess
         }
 
         // Peão é exibido como 'P'
-        public override string ToString() 
+        public override string ToString()
         {
             return "P";
         }
@@ -29,11 +29,11 @@ namespace chess
         }
 
         // Determina o que a peça pode fazer
-        public override bool[,] PossibleMoves() 
+        public override bool[,] PossibleMoves()
         {
             // Cria uma nova matriz do tamanho do tabuleiro
             bool[,] matrix = new bool[Board.Lines, Board.Columns];
-            Position pos = new (0,0);   
+            Position pos = new (0,0);
 
             if (Color == Color.Green)
             {
@@ -58,7 +58,7 @@ namespace chess
                 {
                     matrix[pos.Line, pos.Column] = true;
                 }
-                
+
                 // #jogadaespecial EN PASSANT
                 if (Position.Line == 3)
                 {

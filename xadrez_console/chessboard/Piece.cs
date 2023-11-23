@@ -4,9 +4,9 @@ namespace chessboard
     abstract class Piece
     {
         // Peça tem uma posição | composição
-        public Position Position { get; set; } 
+        public Position Position { get; set; }
         // Tipo enum de Color
-        public Color Color { get; protected set; } 
+        public Color Color { get; protected set; }
         // Quantidade de movimentos
         public int MoveCount { get; protected set; }
         // Peça está em um tabuleiro | composição
@@ -15,7 +15,7 @@ namespace chessboard
         public Piece(Chessboard board, Color color)
         {
             // A classe tabuleiro tem o método para inserção de peças, então no construtor da peça a posição se inicia nula
-            Position = null; 
+            Position = null;
             Board = board;
             Color = color;
             MoveCount = 0; // Por se iniciar com 0 não passa como parametro
@@ -34,15 +34,15 @@ namespace chessboard
         public bool HasPossibleMoves()
         {
             bool[,] matrix = PossibleMoves();
-            for(int i=0; i<Board.Lines; i++) 
+            for(int i=0; i<Board.Lines; i++)
             {
-                for(int j=0; j<Board.Columns; j++) 
+                for(int j=0; j<Board.Columns; j++)
                 {
-                    if(matrix[i,j]) 
+                    if(matrix[i,j])
                     {
                         return true;
                     }
-                }  
+                }
             }
             return false;
         }

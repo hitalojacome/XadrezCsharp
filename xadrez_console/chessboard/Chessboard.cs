@@ -64,7 +64,7 @@ namespace chessboard
             Piece aux = Piece(position);
             // Altera a posição da peça para vazia
             aux.Position = null;
-            // Remove a peça da matriz 
+            // Remove a peça da matriz
             _pieces[position.Line, position.Column] = null;
             // Retorna a variavel auxiliar com a peça
             return aux;

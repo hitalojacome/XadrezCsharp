@@ -4,12 +4,12 @@ namespace chess
 {
     /* A Rook herda da classe peça
     Representação da torre no xadrez*/
-    class Rook : Piece 
+    class Rook : Piece
     {
-        public Rook(Chessboard board, Color color) : base(board, color) {} 
+        public Rook(Chessboard board, Color color) : base(board, color) {}
 
         // Torre é exibido como 'T'
-        public override string ToString() 
+        public override string ToString()
         {
             return "T";
         }
@@ -25,7 +25,7 @@ namespace chess
 
         // Método abstrato da classe pai
         // Determina o que a peça pode fazer
-        public override bool[,] PossibleMoves() 
+        public override bool[,] PossibleMoves()
         {
             // Cria uma nova matriz do tamanho do tabuleiro
             bool[,] matrix = new bool[Board.Lines, Board.Columns];

@@ -8,7 +8,7 @@ namespace chess
         public Bishop(Chessboard board, Color color) : base(board, color) {}
 
         // Bispo é exibido como 'B'
-        public override string ToString() 
+        public override string ToString()
         {
             return "B";
         }
@@ -21,7 +21,7 @@ namespace chess
         }
 
         // Determina o que a peça pode fazer
-        public override bool[,] PossibleMoves() 
+        public override bool[,] PossibleMoves()
         {
             // Cria uma nova matriz do tamanho do tabuleiro
             bool[,] matrix = new bool[Board.Lines, Board.Columns];
@@ -41,10 +41,10 @@ namespace chess
 
             // Movimenta para Nordeste
             pos.SetValues(Position.Line - 1, Position.Column + 1);
-            while (Board.ValidPosition(pos) && CanMove(pos)) 
+            while (Board.ValidPosition(pos) && CanMove(pos))
             {
                 matrix[pos.Line, pos.Column] = true;
-                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color) 
+                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color)
                 {
                     break;
                 }
@@ -53,10 +53,10 @@ namespace chess
 
             // Movimenta para Sudeste
             pos.SetValues(Position.Line + 1, Position.Column + 1);
-            while (Board.ValidPosition(pos) && CanMove(pos)) 
+            while (Board.ValidPosition(pos) && CanMove(pos))
             {
                 matrix[pos.Line, pos.Column] = true;
-                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color) 
+                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color)
                 {
                     break;
                 }
@@ -65,10 +65,10 @@ namespace chess
 
             // Movimenta para Sudoeste
             pos.SetValues(Position.Line + 1, Position.Column - 1);
-            while (Board.ValidPosition(pos) && CanMove(pos)) 
+            while (Board.ValidPosition(pos) && CanMove(pos))
             {
                 matrix[pos.Line, pos.Column] = true;
-                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color) 
+                if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color)
                 {
                     break;
                 }

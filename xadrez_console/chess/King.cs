@@ -13,7 +13,7 @@ namespace chess
         }
 
         // Rei é exibido como 'R'
-        public override string ToString() 
+        public override string ToString()
         {
             return "R";
         }
@@ -36,11 +36,11 @@ namespace chess
 
         // Método abstrato da classe pai
         // Determina o que a peça pode fazer
-        public override bool[,] PossibleMoves() 
+        public override bool[,] PossibleMoves()
         {
             // Cria uma nova matriz do tamanho do tabuleiro
             bool[,] matrix = new bool[Board.Lines, Board.Columns];
-            Position pos = new (0,0);   
+            Position pos = new (0,0);
 
             // Movimenta para Norte
             pos.SetValues(Position.Line - 1, Position.Column);
@@ -103,7 +103,7 @@ namespace chess
             {
                 // #jogadaespecial ROQUE PEQUENO
                 Position posT1 = new (Position.Line, Position.Column + 3);
-                if(TestRookForCastling(posT1))  
+                if(TestRookForCastling(posT1))
                 {
                     Position p1 = new (Position.Line, Position.Column + 1);
                     Position p2 = new (Position.Line, Position.Column + 2);
@@ -115,7 +115,7 @@ namespace chess
 
                 // #jogadaespecial ROQUE GRANDE
                 Position posT2 = new (Position.Line, Position.Column - 4);
-                if(TestRookForCastling(posT2))  
+                if(TestRookForCastling(posT2))
                 {
                     Position p1 = new (Position.Line, Position.Column - 1);
                     Position p2 = new (Position.Line, Position.Column - 2);
@@ -124,7 +124,7 @@ namespace chess
                     {
                         matrix[Position.Line, Position.Column - 2] = true;
                     }
-                }               
+                }
             }
             return matrix;
         }

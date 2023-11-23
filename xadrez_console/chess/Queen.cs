@@ -8,7 +8,7 @@ namespace chess
         public Queen(Chessboard board, Color color) : base(board, color) {}
 
         // Dama é exibido como 'D'
-        public override string ToString() 
+        public override string ToString()
         {
             return "D";
         }
@@ -21,11 +21,11 @@ namespace chess
         }
 
         // Determina o que a peça pode fazer
-        public override bool[,] PossibleMoves() 
+        public override bool[,] PossibleMoves()
         {
             // Cria uma nova matriz do tamanho do tabuleiro
             bool[,] matrix = new bool[Board.Lines, Board.Columns];
-            Position pos = new (0,0);   
+            Position pos = new (0,0);
 
             // Movimenta para Norte
             pos.SetValues(Position.Line - 1, Position.Column);

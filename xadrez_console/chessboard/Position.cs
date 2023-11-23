@@ -21,7 +21,7 @@ namespace chessboard
         }
 
         // Método para impressão da posição
-        public override string ToString() 
+        public override string ToString()
         {
             return $"{Line}, {Column}";
         }
