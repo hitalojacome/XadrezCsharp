@@ -167,6 +167,21 @@ namespace chess
                 throw new ChessException("You cannot put yourself in check!");
             }
 
+            Piece piece = Board.Piece(destination);
+
+            // #jogadaespecial PROMOCAO
+            if (piece is Pawn)
+            {
+                if (piece.Color == Color.Green && destination.Line == 0 || piece.Color == Color.Black && destination.Line == 7)
+                {
+                    piece = Board.RemovePiece(destination);
+                    pieces.Remove(piece);
+                    Piece queen = new Queen(Board, piece.Color);
+                    Board.InsertPiece(queen, destination);
+                    pieces.Add(queen);
+                }
+            }
+
             // SE o oponente do jogador atual estiver em xeque
             if(IsCheck(Opponent(CurrentPlayer)))
             {
@@ -187,9 +202,7 @@ namespace chess
             {
                 Turn++;
                 ChangePlayer();
-            }
-
-            Piece piece = Board.Piece(destination);
+            }            
 
             // #jogadaespecial EN PASSANT
             if (piece is Pawn && (destination.Line == origin.Line - 2 || destination.Line == origin.Line + 2))
