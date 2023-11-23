@@ -65,12 +65,12 @@ namespace chess
                     Position left = new(Position.Line, Position.Column - 1);
                     if (Board.ValidPosition(left) && HasEnemy(left) && Board.Piece(left) == match.VulnerableEnPassant)
                     {
-                        matrix[left.Line, left.Column] = true;
+                        matrix[left.Line - 1, left.Column] = true;
                     }
                     Position right = new(Position.Line, Position.Column + 1);
                     if (Board.ValidPosition(right) && HasEnemy(right) && Board.Piece(right) == match.VulnerableEnPassant)
                     {
-                        matrix[right.Line, right.Column] = true;
+                        matrix[right.Line - 1, right.Column] = true;
                     }
                 }
             }
@@ -104,12 +104,12 @@ namespace chess
                     Position left = new(Position.Line, Position.Column - 1);
                     if (Board.ValidPosition(left) && HasEnemy(left) && Board.Piece(left) == match.VulnerableEnPassant)
                     {
-                        matrix[left.Line, left.Column] = true;
+                        matrix[left.Line + 1, left.Column] = true;
                     }
                     Position right = new(Position.Line, Position.Column + 1);
                     if (Board.ValidPosition(right) && HasEnemy(right) && Board.Piece(right) == match.VulnerableEnPassant)
                     {
-                        matrix[right.Line, right.Column] = true;
+                        matrix[right.Line + 1, right.Column] = true;
                     }
                 }
 

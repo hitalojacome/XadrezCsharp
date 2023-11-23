@@ -74,6 +74,25 @@ namespace chess
                 Board.InsertPiece(T, rookDestiny);
             }
 
+            // #jogadaespecial EN PASSANT
+            if (piece is Pawn)
+            {
+                if (origin.Column != destination.Column && capturedPiece == null)
+                {
+                    Position posP;
+                    if (piece.Color == Color.Green)
+                    {
+                        posP = new Position(destination.Line + 1, destination.Column);
+                    }
+                    else
+                    {
+                        posP = new Position(destination.Line -1, destination.Column);
+                    }
+                    capturedPiece = Board.RemovePiece(posP);
+                    capturedPieces.Add(capturedPiece);
+                }
+            }
+
             return capturedPiece;
         }
 
@@ -113,6 +132,25 @@ namespace chess
                 Piece T = Board.RemovePiece(rookDestiny);
                 T.UndoMoveCount();
                 Board.InsertPiece(T, rookOrigin);
+            }
+
+            // #jogadaespecial EN PASSANT
+            if (piece is Pawn)
+            {
+                if (origin.Column != destination.Column && capturedPiece == VulnerableEnPassant)
+                {
+                    Piece pawn = Board.RemovePiece(destination);
+                    Position posP;
+                    if (piece.Color == Color.Green)
+                    {
+                        posP = new Position(3, destination.Column);
+                    }
+                    else
+                    {
+                        posP = new Position(4, destination.Column);
+                    }
+                    Board.InsertPiece(pawn, posP);
+                }
             }
         }
 
